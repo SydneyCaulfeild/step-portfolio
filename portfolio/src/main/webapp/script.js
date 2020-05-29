@@ -27,7 +27,7 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
-
+//insert a navigation bar at the top of all pages
 fetch("navbar.html")
                 .then(response => {
                     return response.text();
@@ -36,6 +36,7 @@ fetch("navbar.html")
                     document.querySelector("header").innerHTML = data;
                 });
 
+//add a footer at the bottom of all pages
 fetch("footer.html")
                 .then(response => {
                     return response.text();
@@ -43,4 +44,3 @@ fetch("footer.html")
                 .then(data => {
                     document.querySelector("footer").innerHTML = data;
                 });
-    
