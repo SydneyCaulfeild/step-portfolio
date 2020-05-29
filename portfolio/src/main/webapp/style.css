@@ -59,7 +59,7 @@ body {
   float: left; 
  
   position: relative;
-  left:50%;
+  left:42%;
 }
  
 .btn-group button:not(:last-child) {
@@ -76,4 +76,33 @@ body {
 /* Add a background color on hover */
 .btn-group button:hover {
   background-color: #158b8b;
+}
+
+
+/******** Style for the image gallery in background.html ************/
+.gallery{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.picture {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+.picture:hover {
+  border: 1px solid #777;
+}
+
+.picture img {
+  width: 100%;
+  height: auto;
+}
+
+.desc {
+  padding: 15px;
+  text-align: center;
 }
