@@ -15,9 +15,10 @@
 /**
  * Adds a random greeting to the page.
  */
+
 function addRandomFact() {
   const facts =
-      ['I have never broken a bone', 'My last name spells the word "field" wrong', 'My favourite food is peanut butter'];
+      ['I have never broken a bone', 'My last name spells the word "field" wrong', 'My favourite food is peanut butter', 'I was born in Toronto', 'I used to play provincial-level soccer', 'I have been in a hot air balloon'];
  
   // Pick a random greeting.
   const fact = facts[Math.floor(Math.random() * facts.length)];
@@ -27,7 +28,7 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
-//insert a navigation bar at the top of all pages
+//function to insert a navigation bar at the top of every page
 fetch("navbar.html")
                 .then(response => {
                     return response.text();
@@ -36,7 +37,7 @@ fetch("navbar.html")
                     document.querySelector("header").innerHTML = data;
                 });
 
-//add a footer at the bottom of all pages
+//function to insert a footer at the top of every page
 fetch("footer.html")
                 .then(response => {
                     return response.text();
