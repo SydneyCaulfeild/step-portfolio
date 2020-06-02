@@ -45,3 +45,10 @@ fetch("footer.html")
                 .then(data => {
                     document.querySelector("footer").innerHTML = data;
                 });
+
+//fetching the welcome message
+function fetchWelcome() {
+  fetch('/data').then(response => response.text()).then((message) => {
+    document.getElementById('welcome-container').innerText = message;
+  });
+}
