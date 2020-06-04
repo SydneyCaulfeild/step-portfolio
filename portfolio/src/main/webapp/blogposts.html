@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Sydney Caulfeild's Portfolio</title>
+  <title>Blog Page</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
-<body> 
+<body onload="displayComments()"> 
  
   <div class="header">
     <h1>Blog Page</h1>
@@ -17,14 +17,16 @@
   <!-- Element where the heading's navigation bar will be inserted. -->
   <header></header>
 
-  <form action="/data" method="POST">
+  <form action="/add-comment" method="POST">
     <label for="name-input">Name</label>
     <input type="text" name="name-input" placeholder="Your name">
-    <label for="comment-input">Comment</label>
-    <textarea type="text" name="comment-input" placeholder="Please leave a comment!"></textarea>
+    <label for="message">Comment</label>
+    <textarea type="text" name="message" placeholder="Please leave a comment!"></textarea>
     <br/><br/>
-    <input type="submit" />
+    <input type="submit" value="Submit Comment"/>
   </form>
+
+  <div id="comments-container"></div>
   
   <!-- Element where the footer will be inserted. -->
   <footer></footer>
