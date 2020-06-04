@@ -47,8 +47,31 @@ fetch("footer.html")
                 });
 
 //fetching the welcome message
-function fetchWelcome() {
+/*function fetchWelcome() {
   fetch('/data').then(response => response.text()).then((message) => {
     document.getElementById('welcome-container').innerText = message;
   });
+}*/
+
+//fetching the JSON arraylist string from server
+function fetchList() {
+  fetch('/data').then(response => response.json()).then((citiesList) => {
+    console.log(citiesList);
+    const citiesListElement = document.getElementById('cities-list-container');
+    citiesListElement.innerHTML = '';
+    citiesListElement.appendChild(
+        createListElement(citiesList[0]));
+    citiesListElement.appendChild(
+        createListElement(citiesList[1]));
+    citiesListElement.appendChild(
+        createListElement(citiesList[2]));
+
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
