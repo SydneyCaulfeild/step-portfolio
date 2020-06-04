@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
-<body onload="fetchList()"> 
+<body onload="fetchFavoriteCities()"> 
  
   <div class="header">
     <h1>Sydney Caulfeild</h1>
@@ -16,8 +16,6 @@
 
   <!-- Element where the heading's navigation bar will be inserted. -->
   <header></header>
- 
-  <!-- <div id="welcome-container"></div> -->
 
   <div id="intro">
     <p>I am 20 years old and am currently living in Ottawa, Ontario. I am also going into my third year of Computer Engineering at Queen's University. Please click on one of the menu tabs to learn more about different parts of my life!</p> 
@@ -30,12 +28,6 @@
     <p>Here is a list of my favourite cities that I have visited in Canada!</p>
     <div id="cities-list-container"></div>
   </div>
-
-  <form action="/data" method="POST">
-    <p>Please leave a comment!</p>
-    <textarea name="text-input"></textarea>
-    <br/>
-  </form>
   
   <!-- Element where the footer will be inserted. -->
   <footer></footer>
