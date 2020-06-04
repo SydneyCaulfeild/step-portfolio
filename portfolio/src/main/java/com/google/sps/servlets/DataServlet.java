@@ -14,8 +14,8 @@
 
 package com.google.sps.servlets;
 import com.google.gson.Gson;
-
 import java.io.IOException;
+import java.util.List;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,11 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private ArrayList<String> canadianCities;
+  private List<String> canadianCities = new ArrayList<>();
 
   @Override
   public void init(){
-    canadianCities = new ArrayList<>();
     canadianCities.add("Canmore, Alberta"); 
     canadianCities.add("St. Johns, Newfoundland"); 
     canadianCities.add("Kingston, Ontario"); 
@@ -38,8 +37,6 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //response.setContentType("text/html;");
-    //response.getWriter().println("Hello and welcome to my portfolio!");
 
     // Convert the server stats to JSON
     String json = convertToJsonUsingGson(canadianCities);
@@ -49,10 +46,9 @@ public class DataServlet extends HttpServlet {
   }
 
   /**
-   * Converts an arraylist into a JSON string using the Gson library. Note: We first added
-   * the Gson library dependency to pom.xml.
+   * Converts an arraylist into a JSON string using the Gson library. 
    */
-  private String convertToJsonUsingGson(ArrayList canadianCities) {
+  private String convertToJsonUsingGson(List canadianCities) {
     Gson gson = new Gson();
     String json = gson.toJson(canadianCities);
     return json;
