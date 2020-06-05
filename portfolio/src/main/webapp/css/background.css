@@ -1,0 +1,27 @@
+.gallery{
+  align-items: center; /* align vertical */
+  display: flex;
+  justify-content: center; /* align horizontal */
+  padding-top:40px;
+}
+
+.picture {
+  border: 1px solid #ccc;
+  float: left;
+  margin: 5px;
+  width: 310px;
+}
+
+.picture:hover {
+  border: 1px solid #777;
+}
+
+.picture img {
+  height: auto;
+  width: 100%;
+}
+
+.desc {
+  padding: 15px;
+  text-align: center;
+}

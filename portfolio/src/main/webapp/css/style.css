@@ -1,0 +1,101 @@
+/*body for all pages*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+ 
+ /**************************** styling for the index.html file (main page) *************************/
+.header {
+  background: #1abcbc;
+  color: white;
+  padding: 80px;
+  text-align: center;
+}
+ 
+.header h1 {
+  font-size: 40px;
+}
+
+#cities {
+  border: 2px solid #FF9F55;
+  border-radius:5px;
+  font-size:20px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:40px;
+  padding:10px;
+  text-align:center;
+  width:30%;
+}
+
+#intro{
+  padding-bottom:100px;
+  padding-left:100px;
+  padding-right:100px;
+  font-size:20px;
+  text-align:center;
+}
+
+#intro p {
+  padding-bottom:60px;
+}
+ 
+ /************************* styling for the navbar.html file **************************/
+/* Style the top navigation bar */
+.navbar {
+  background-color: #333;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  overflow: hidden;
+}
+ 
+/* Style the navigation bar links */
+.navbar a {
+  color: white;
+  display: block;
+  padding: 14px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+ 
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+ 
+  /************************* styling for the footer.html file **************************/
+.footer {
+  background: #ddd; 
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  padding: 20px; 
+}
+
+
+.btn-group button {
+  background-color: #1abcbc; 
+  border: 1px solid black; 
+  color: white; 
+  cursor: pointer; 
+  float: left; 
+  padding: 10px 24px; 
+}
+ 
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+ 
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+ 
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #158b8b;
+}
+
