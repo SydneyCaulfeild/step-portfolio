@@ -13,9 +13,8 @@
 // limitations under the License.
  
 /**
- * Adds a random greeting to the page.
+ * Adds a random fact to the page.
  */
-
 function addRandomFact() {
   const facts =
       ['I have never broken a bone', 'My last name spells the word "field" wrong', 'My favourite food is peanut butter', 'I was born in Toronto', 'I used to play provincial-level soccer', 'I have been in a hot air balloon'];
@@ -28,7 +27,9 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
-//function to insert a navigation bar at the top of every page
+/**
+ * Inserts a navigation bar.
+ */
 fetch("navbar.html")
                 .then(response => {
                     return response.text();
@@ -37,7 +38,9 @@ fetch("navbar.html")
                     document.querySelector("header").innerHTML = data;
                 });
 
-//function to insert a footer at the top of every page
+/**
+ * Inserts a footer.
+ */
 fetch("footer.html")
                 .then(response => {
                     return response.text();
@@ -46,32 +49,69 @@ fetch("footer.html")
                     document.querySelector("footer").innerHTML = data;
                 });
 
-//fetching the welcome message
-/*function fetchWelcome() {
-  fetch('/data').then(response => response.text()).then((message) => {
-    document.getElementById('welcome-container').innerText = message;
-  });
-}*/
+/**
+ * Inserts a list of my favourite cities.
+ */
 
-//fetching the JSON arraylist string from server
-function fetchList() {
+//fetching the JSON arraylist string from the server
+function fetchFavoriteCities() {
   fetch('/data').then(response => response.json()).then((citiesList) => {
     console.log(citiesList);
     const citiesListElement = document.getElementById('cities-list-container');
     citiesListElement.innerHTML = '';
-    citiesListElement.appendChild(
-        createListElement(citiesList[0]));
-    citiesListElement.appendChild(
-        createListElement(citiesList[1]));
-    citiesListElement.appendChild(
-        createListElement(citiesList[2]));
-
+    citiesList.forEach((city) => {
+        citiesListElement.appendChild(createListElement(city));
+    });
   });
 }
 
-/** Creates an <li> element containing text. */
+// Creates an <li> element containing text. 
 function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
 }
+
+/**
+ * Builds the comments UI.
+ */
+//function called by blogposts.html's body onload 
+function displayComments() {
+  fetch("/add-comment").then(response => response.json()).then((comments) => {
+      const commentContainer = document.getElementById('comments-container');
+      commentContainer.innerHTML = "";
+      comments.forEach((comment) => {
+        commentContainer.appendChild(createComment(comment))
+      });
+    });
+}
+
+function createComment(comment) {
+  const nameElement = createHTML('h4', comment.name);
+  const timeElement = createHTML('h5', comment.time);
+
+  let headerHTML = document.createElement('div');
+  headerHTML.className = "comment-heading";
+  let headerElements = [nameElement, timeElement]
+  headerElements.forEach((htmlElement) => {
+    headerHTML.appendChild(htmlElement)
+  });
+  
+  const contentElement = createHTML('h4', comment.message);
+
+  let commentHTML = document.createElement('div');
+  commentHTML.className = "comment";
+  
+  let commentElements = [headerHTML, contentElement];
+  commentElements.forEach((htmlElement) => {
+    commentHTML.appendChild(htmlElement)
+  });
+  return commentHTML;
+}
+
+function createHTML(type, content) {
+    const htmlElement = document.createElement(type);
+    htmlElement.innerHTML = content;
+    return htmlElement;
+}
+
