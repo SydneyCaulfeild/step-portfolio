@@ -78,8 +78,8 @@ function createListElement(text) {
 //function called by blogposts.html's body onload 
 function displayComments() {
   console.log("in display comments()");
-  var quantity = document.getElementById('comments-quantity').value;
-  fetch("/add-comment?quantity="+quantity).then(response => response.json()).then((comments) => {
+  let commentsQuantity = document.getElementById('commentsQuantity').value;
+  fetch("/add-comment?commentsQuantity="+commentsQuantity).then(response => response.json()).then((comments) => {
       const commentContainer = document.getElementById('comments-container');
       commentContainer.innerHTML = "";
       comments.forEach((comment) => {

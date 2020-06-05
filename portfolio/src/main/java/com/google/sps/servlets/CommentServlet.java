@@ -54,7 +54,8 @@ public class CommentServlet extends HttpServlet {
   }
 
   private int getNumComments(HttpServletRequest request){
-    String userChoiceString = request.getParameter("comments-quantity");
+    String userChoiceString = request.getParameter("commentsQuantity");
+
     int userChoice;
     try {
       userChoice = Integer.parseInt(userChoiceString);
