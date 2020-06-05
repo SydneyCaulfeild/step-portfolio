@@ -39,10 +39,38 @@ public class CommentServlet extends HttpServlet {
       commentList.add(new Comment(name, message, time));
     }
 
+    int numComments = getNumComments(request);
+
+    if (numComments>25){
+        numComments=25;
+    }
+
+    commentList = commentList.subList(0, numComments);
+
     String json = convertToJsonUsingGson(commentList);
 
     response.setContentType("application/json;");
     response.getWriter().println(json);
+  }
+
+  private int getNumComments(HttpServletRequest request){
+    String userChoiceString = request.getParameter("comments-quantity");
+    int userChoice;
+    try {
+      userChoice = Integer.parseInt(userChoiceString);
+    } 
+    catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + userChoiceString);
+      return -1;
+    }
+
+    // Check that the input is between 1 and 25
+    if (userChoice < 1 || userChoice > 25) {
+      System.err.println("Player choice is out of range: " + userChoiceString);
+      return -1;
+    }
+
+    return userChoice;
   }
 
   @Override
