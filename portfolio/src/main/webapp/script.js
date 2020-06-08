@@ -121,21 +121,14 @@ function createHTML(type, content) {
  */
 function statusCheck() {
   fetch('/status').then(response => response.json()).then((status) => {
-    console.log(status);
-
-    //if the user is logged in
     if (status=="logged in"){
-      [].forEach.call(document.querySelectorAll('.logout-hidden'), function (el) {
-        el.style.visibility = 'visible';
-      });
-    }
-    //if the user is not logged in
-    else{
-      [].forEach.call(document.querySelectorAll('.login-hidden'), function (el) {
-        el.style.visibility = 'visible';
-      });    
-    }
-
+        [].forEach.call(document.querySelectorAll('.hide-when-in'), function (el) {
+          el.style.visibility = 'hidden';
+        });
+        [].forEach.call(document.querySelectorAll('.hide-when-out'), function (el) {
+          el.style.visibility = 'visible';
+        });
+    }  
   });
 }
 
