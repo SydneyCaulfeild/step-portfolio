@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/blogposts.css">
   <script src="script.js"></script>
 </head>
-<body onload="statusCheck()"> 
+<body> 
  
   <div class="header">
     <h1>Blog Page</h1>
@@ -28,15 +28,25 @@
       <input type="text" name="name-input" placeholder="Your name"></br></br>
       <label for="message">Comment</label></br>
       <textarea id="cname" type="text" name="message" placeholder="Please leave a comment!"></textarea></br></br>
-      <input id="submit-btn" type="submit" value="Submit Comment"/></br></br>
+      <input class="submit-btn" type="submit" value="Submit Comment"/></br></br>
     </form>
 
-    <p class="login-hidden">please login to see comments:</p>
-    <button class="login-hidden" onclick="userLogin()">Login</button>
+
+    <div class="hide-when-in">
+      <form action="/login" method="GET">
+      <p>You must login to view blog comments. Please enter your name if you would like to login:</p>
+      <label for="name"></label></br>
+      <input type="text" name="name" placeholder="Name"></br></br>
+      <input class="submit-btn" type="submit" value="Login"/></br></br> 
+      </form> 
+
+      <p>Once you have logged in, please click the button below to view comments.</p>
+      <button onclick="statusCheck()">View comments.</button>
+    </div> 
     
-    <label class="logout-hidden" for="commentsQuantity">Please select the number of comments you would like to see (between 1 and 25):</label>
-    <input type="number" class="logout-hidden" id="commentsQuantity" name="commentsQuantity" min="1" max="25">
-    <input type="submit" class="logout-hidden" onclick="displayComments()" value="Display comments">
+    <label class="hide-when-out" for="commentsQuantity">Please select the number of comments you would like to see (between 1 and 25):</label>
+    <input type="number" class="hide-when-out" id="commentsQuantity" name="commentsQuantity" min="1" max="25">
+    <input type="submit" class="hide-when-out" onclick="displayComments()" value="Display comments">
 
     <div id="comments-container"></div>
 

@@ -14,7 +14,7 @@
   width: 40%;
 }
 
-#submit-btn {
+.submit-btn {
   background-color: #FF9F55;
 }
 
@@ -37,10 +37,10 @@
   width: 40%;
 }
 
-.logout-hidden {
+.hide-when-out {
     visibility:hidden;
 }
 
-.login-hidden {
-    visibility:hidden;
+.hide-when-in {
+    visibility:visible;
 }
