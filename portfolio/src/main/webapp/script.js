@@ -77,7 +77,6 @@ function createListElement(text) {
  */
 //function called by blogposts.html's body onload 
 function displayComments() {
-  console.log("in display comments()");
   let commentsQuantity = document.getElementById('commentsQuantity').value;
   fetch("/add-comment?commentsQuantity="+commentsQuantity).then(response => response.json()).then((comments) => {
       const commentContainer = document.getElementById('comments-container');
@@ -115,5 +114,28 @@ function createHTML(type, content) {
     const htmlElement = document.createElement(type);
     htmlElement.innerHTML = content;
     return htmlElement;
+}
+
+/**
+ * Checks if the user is logged in.
+ */
+function statusCheck() {
+  fetch('/status').then(response => response.json()).then((status) => {
+    console.log(status);
+
+    //if the user is logged in
+    if (status=="logged in"){
+      [].forEach.call(document.querySelectorAll('.logout-hidden'), function (el) {
+        el.style.visibility = 'visible';
+      });
+    }
+    //if the user is not logged in
+    else{
+      [].forEach.call(document.querySelectorAll('.login-hidden'), function (el) {
+        el.style.visibility = 'visible';
+      });    
+    }
+
+  });
 }
 
