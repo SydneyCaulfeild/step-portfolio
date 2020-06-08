@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/blogposts.css">
   <script src="script.js"></script>
 </head>
-<body> 
+<body onload="statusCheck()"> 
  
   <div class="header">
     <h1>Blog Page</h1>
@@ -31,11 +31,12 @@
       <input id="submit-btn" type="submit" value="Submit Comment"/></br></br>
     </form>
 
+    <p class="login-hidden">please login to see comments:</p>
+    <button class="login-hidden" onclick="userLogin()">Login</button>
     
-    <label for="commentsQuantity">Please select the number of comments you would like to see (between 1 and 25):</label>
-    <input type="number" id="commentsQuantity" name="commentsQuantity" min="1" max="25">
-    <input type="submit" onclick="displayComments()" value="Display comments">
-
+    <label class="logout-hidden" for="commentsQuantity">Please select the number of comments you would like to see (between 1 and 25):</label>
+    <input type="number" class="logout-hidden" id="commentsQuantity" name="commentsQuantity" min="1" max="25">
+    <input type="submit" class="logout-hidden" onclick="displayComments()" value="Display comments">
 
     <div id="comments-container"></div>
 

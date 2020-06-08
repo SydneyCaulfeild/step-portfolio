@@ -36,3 +36,11 @@
 #comments-container {
   width: 40%;
 }
+
+.logout-hidden {
+    visibility:hidden;
+}
+
+.login-hidden {
+    visibility:hidden;
+}
