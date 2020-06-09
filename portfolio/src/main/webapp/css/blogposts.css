@@ -36,11 +36,3 @@
 #comments-container {
   width: 40%;
 }
-
-.hide-when-out {
-    visibility:hidden;
-}
-
-.hide-when-in {
-    visibility:visible;
-}

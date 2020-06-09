@@ -30,23 +30,10 @@
       <textarea id="cname" type="text" name="message" placeholder="Please leave a comment!"></textarea></br></br>
       <input class="submit-btn" type="submit" value="Submit Comment"/></br></br>
     </form>
-
-
-    <div class="hide-when-in">
-      <form action="/login" method="GET">
-      <p>You must login to view blog comments. Please enter your name if you would like to login:</p>
-      <label for="name"></label></br>
-      <input type="text" name="name" placeholder="Name"></br></br>
-      <input class="submit-btn" type="submit" value="Login"/></br></br> 
-      </form> 
-
-      <p>Once you have logged in, please click the button below to view comments.</p>
-      <button onclick="statusCheck()">View comments.</button>
-    </div> 
     
-    <label class="hide-when-out" for="commentsQuantity">Please select the number of comments you would like to see (between 1 and 25):</label>
-    <input type="number" class="hide-when-out" id="commentsQuantity" name="commentsQuantity" min="1" max="25">
-    <input type="submit" class="hide-when-out" onclick="displayComments()" value="Display comments">
+    <label for="commentsQuantity">Please select the number of comments you would like to see (between 1 and 25):</label>
+    <input type="number" id="commentsQuantity" name="commentsQuantity" min="1" max="25">
+    <input type="submit" onclick="displayComments()" value="Display comments">
 
     <div id="comments-container"></div>
 
