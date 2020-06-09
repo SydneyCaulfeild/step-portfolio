@@ -23,6 +23,8 @@ public class CommentServlet extends HttpServlet {
  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    int entityCount=-1;
+
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -37,12 +39,13 @@ public class CommentServlet extends HttpServlet {
       Date time = (Date) entity.getProperty("timestamp");
 
       commentList.add(new Comment(name, message, time));
+      entityCount++;
     }
 
     int numComments = getNumComments(request);
 
-    if (numComments>25){
-        numComments=25;
+    if (numComments>entityCount){
+        numComments=entityCount;
     }
 
     commentList = commentList.subList(0, numComments);
@@ -65,8 +68,8 @@ public class CommentServlet extends HttpServlet {
       return -1;
     }
 
-    // Check that the input is between 1 and 25
-    if (userChoice < 1 || userChoice > 25) {
+    // Check that the input is between 1
+    if (userChoice < 1) {
       System.err.println("Player choice is out of range: " + userChoiceString);
       return -1;
     }
