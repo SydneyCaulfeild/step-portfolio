@@ -77,8 +77,7 @@ function createListElement(text) {
  */
 //function called by blogposts.html's body onload 
 function displayComments() {
-  let commentsQuantity = document.getElementById('commentsQuantity').value;
-  fetch("/add-comment?commentsQuantity="+commentsQuantity).then(response => response.json()).then((comments) => {
+  fetch("/add-comment").then(response => response.json()).then((comments) => {
       const commentContainer = document.getElementById('comments-container');
       commentContainer.innerHTML = "";
       comments.forEach((comment) => {
@@ -128,6 +127,10 @@ function statusCheck() {
         [].forEach.call(document.querySelectorAll('.hide-when-out'), function (el) {
           el.style.visibility = 'visible';
         });
+        displayComments();
+    }
+    else{
+        document.getElementById('not-logged-in').style.visibility = "visible";
     }  
   });
 }
