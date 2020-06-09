@@ -116,19 +116,3 @@ function createHTML(type, content) {
     return htmlElement;
 }
 
-/**
- * Checks if the user is logged in.
- */
-function statusCheck() {
-  fetch('/status').then(response => response.json()).then((status) => {
-    if (status=="logged in"){
-        [].forEach.call(document.querySelectorAll('.hide-when-in'), function (el) {
-          el.style.visibility = 'hidden';
-        });
-        [].forEach.call(document.querySelectorAll('.hide-when-out'), function (el) {
-          el.style.visibility = 'visible';
-        });
-    }  
-  });
-}
-
