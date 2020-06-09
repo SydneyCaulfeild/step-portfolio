@@ -44,3 +44,7 @@
 .hide-when-in {
     visibility:visible;
 }
+
+#not-logged-in {
+    visibility: hidden;
+}
