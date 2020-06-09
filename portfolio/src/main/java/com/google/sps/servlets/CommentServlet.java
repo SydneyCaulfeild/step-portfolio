@@ -39,14 +39,6 @@ public class CommentServlet extends HttpServlet {
       commentList.add(new Comment(name, message, time));
     }
 
-    int numComments = getNumComments(request);
-
-    if (numComments>25){
-        numComments=25;
-    }
-
-    commentList = commentList.subList(0, numComments);
-
     String json = convertToJsonUsingGson(commentList);
 
     response.setContentType("application/json;");
