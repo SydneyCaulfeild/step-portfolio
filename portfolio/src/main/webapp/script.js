@@ -116,3 +116,31 @@ function createHTML(type, content) {
     return htmlElement;
 }
 
+/**
+ * Builds the UI for the chart.
+ */
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+/** Fetches data and uses it to create a chart. */
+function drawChart() {
+  fetch('/transit-data').then(response => response.json())
+  .then((accessibilityRating) => {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'Province');
+    data.addColumn('number', 'Percentage');
+    Object.keys(accessibilityRating).forEach((province) => {
+      data.addRow([province, accessibilityRating[province]]);
+    });
+
+    const options = {
+      'title': 'Percentage of publicly owned public transit passenger stations and terminals that are accessible',
+      'width':1000,
+      'height':1500
+    };
+
+    const chart = new google.visualization.LineChart(
+        document.getElementById('chart-container'));
+    chart.draw(data, options);
+  });
+}
