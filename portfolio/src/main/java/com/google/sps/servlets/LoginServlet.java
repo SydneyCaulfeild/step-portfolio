@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
         response.setContentType("text/html");
+        
         String urlToRedirectToAfterUserLogsIn = "/blogposts.html";
         String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 

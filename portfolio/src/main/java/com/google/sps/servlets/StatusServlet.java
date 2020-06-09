@@ -25,7 +25,7 @@ public class StatusServlet extends HttpServlet {
     if (userService.isUserLoggedIn()) {
       status = "logged in";
     } else {
-      status= "logged out";
+      status = "logged out";
     }
 
     // Convert the server stats to JSON
