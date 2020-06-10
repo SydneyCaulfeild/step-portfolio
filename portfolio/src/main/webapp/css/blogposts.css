@@ -1,0 +1,38 @@
+.blogpost-body {
+  border: 6px solid #FF9F55;
+  margin: auto;
+  margin-top: 40px;
+  padding: 20px;
+  width: 70%;
+}
+
+.blogpost-body h3 {
+  text-align: center;
+}
+
+#cname {
+  width: 40%;
+}
+
+.submit-btn {
+  background-color: #FF9F55;
+}
+
+.comment-heading {
+  display: flex;
+  font-style: normal;
+  height: 40px;
+  text-shadow: 2px 2px 5px #FF9F55;
+}
+
+.comment-heading > * {
+  margin-right: 10px;
+}
+
+.comment {
+  font-style: italic;
+}
+
+#comments-container {
+  width: 40%;
+}

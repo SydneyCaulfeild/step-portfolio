@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Sydney Caulfeild's Portfolio</title>
+  <title>Blog Page</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/blogposts.css">
   <script src="script.js"></script>
 </head>
 <body> 
@@ -17,15 +18,26 @@
   <!-- Element where the heading's navigation bar will be inserted. -->
   <header></header>
 
-  <form action="/data" method="POST">
-    <label for="name-input">Name</label>
-    <input type="text" name="name-input" placeholder="Your name">
-    <label for="comment-input">Comment</label>
-    <textarea type="text" name="comment-input" placeholder="Please leave a comment!"></textarea>
-    <br/><br/>
-    <input type="submit" />
-  </form>
-  
+  <div class="blogpost-body">
+
+    <h3>Welcome to the blog page. You can read other comments down below or leave a new comment.</h3>
+
+
+    <form action="/add-comment" method="POST">
+      <label for="name-input">Name</label></br>
+      <input type="text" name="name-input" placeholder="Your name"></br></br>
+      <label for="message">Comment</label></br>
+      <textarea id="cname" type="text" name="message" placeholder="Please leave a comment!"></textarea></br></br>
+      <input class="submit-btn" type="submit" value="Submit Comment"/></br></br>
+    </form>
+    
+    <label for="commentsQuantity">Please select the number of comments you would like to see:</label>
+    <input type="number" id="commentsQuantity" name="commentsQuantity" min="1" max="25">
+    <input type="submit" onclick="displayComments()" value="Display comments">
+
+    <div id="comments-container"></div>
+
+  </div>
   <!-- Element where the footer will be inserted. -->
   <footer></footer>
 
