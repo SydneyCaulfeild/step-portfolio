@@ -53,7 +53,7 @@ fetch("footer.html")
  * Inserts a list of my favourite cities.
  */
 
-//fetching the JSON arraylist string from the server
+// Fetching the JSON arraylist string from the server
 function fetchFavoriteCities() {
   fetch('/data').then(response => response.json()).then((citiesList) => {
     console.log(citiesList);
@@ -75,7 +75,8 @@ function createListElement(text) {
 /**
  * Builds the comments UI.
  */
-//function called by blogposts.html's body onload 
+
+// Function called by blogposts.html's body onload 
 function displayComments() {
   let commentsQuantity = document.getElementById('commentsQuantity').value;
   fetch("/add-comment?commentsQuantity="+commentsQuantity).then(response => response.json()).then((comments) => {
@@ -144,3 +145,50 @@ function drawChart() {
     chart.draw(data, options);
   });
 }
+
+/**
+ * Create a map and adds it to the public-transit page.
+ */
+function createMap(){
+  var myLatlng = new google.maps.LatLng(45.395627, -75.744838);
+  var mapOptions = {
+    zoom: 13.2,
+    center: myLatlng,
+    mapTypeId: 'hybrid'
+  };
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  // Add a layer to highlight bike paths
+  var bicyclingLayer = new google.maps.BicyclingLayer ();
+  bicyclingLayer.setMap(map);
+
+  // Features for individual markers
+  var features = [
+    {
+      label: 'A',
+      position: new google.maps.LatLng(45.364213, -75.799481),
+      title: 'Ottawa River Pathway'
+    }, {
+      label: 'B',
+      position: new google.maps.LatLng(45.426118, -75.724296),
+      title: 'Voyageurs Pathway'
+    }, {
+      label: 'C',
+      position: new google.maps.LatLng(45.396316, -75.707927),
+      title: 'Rideau Canal Western Pathway'
+    }
+  ];
+
+  // Create markers
+  for (var i = 0; i < features.length; i++) {
+    var marker = new google.maps.Marker({
+      label: features[i].label,
+      position: features[i].position,
+      title: features[i].title,
+      map: map
+    });
+  };
+}
+
+
+
