@@ -128,8 +128,10 @@ function drawChart() {
   fetch('/transit-data').then(response => response.json())
   .then((accessibilityRating) => {
     const data = new google.visualization.DataTable();
+
     data.addColumn('string', 'Province');
     data.addColumn('number', 'Percentage');
+    
     Object.keys(accessibilityRating).forEach((province) => {
       data.addRow([province, accessibilityRating[province]]);
     });
@@ -140,8 +142,7 @@ function drawChart() {
       'height':1500
     };
 
-    const chart = new google.visualization.LineChart(
-        document.getElementById('chart-container'));
+    const chart = new google.visualization.LineChart(document.getElementById('chart-container'));
     chart.draw(data, options);
   });
 }

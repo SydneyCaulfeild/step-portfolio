@@ -31,8 +31,8 @@ public class TransitDataServlet extends HttpServlet {
 
   @Override
   public void init() {
-    Scanner scanner = new Scanner(getServletContext().getResourceAsStream(
-        "/WEB-INF/transit-accessibility-data.csv"));
+    Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/transit-accessibility-data.csv"));
+    
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
