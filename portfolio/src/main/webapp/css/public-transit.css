@@ -1,0 +1,22 @@
+.content {
+  font-size: 20px;
+  margin: auto;
+  padding-top: 40px;
+  text-align: center;
+  width: 60%;
+}
+
+#chart-container {
+  align-items: center; /* align vertical */
+  display: flex;
+  justify-content: center; /* align horizontal */
+}
+
+#map {
+  border: thin solid black;
+  height: 700px;
+  margin: auto;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  width: 900px;
+}
