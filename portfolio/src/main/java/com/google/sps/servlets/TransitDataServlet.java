@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Returns bigfoot data as a JSON object, e.g. {"2017": 52, "2018": 34}] */
+/** Returns data from csv file on the percentage of accessible public transit sites in provinces as a JSON object, e.g. {"Ontario": 84} */
 @WebServlet("/transit-data")
 public class TransitDataServlet extends HttpServlet {
 

@@ -45,24 +45,8 @@ public class CommentServlet extends HttpServlet {
       commentList = commentList.subList(0, numCommentsRequested);
     }
 
-    String json = convertToJsonUsingGson(commentList);
-
     response.setContentType("application/json;");
-    response.getWriter().println(json);
-  }
-
-  private int getNumComments(HttpServletRequest request){
-    String userChoiceString = request.getParameter("commentsQuantity");
-
-    int userChoice;
-    userChoice = Integer.parseInt(userChoiceString);
-
-    // Check that the input is between 1
-    if (userChoice < 1) {
-      throw new IllegalArgumentException("Player choice is out of range: " + userChoice);
-    }
-
-    return userChoice;
+    response.getWriter().println(convertToJsonUsingGson(commentList));
   }
 
   @Override
@@ -83,16 +67,29 @@ public class CommentServlet extends HttpServlet {
     response.sendRedirect("/blogposts.html");
   }
 
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+  private static int getNumComments(HttpServletRequest request){
+    String userChoiceString = request.getParameter("commentsQuantity");
+
+    int userChoice;
+    userChoice = Integer.parseInt(userChoiceString);
+
+    // Check that the input is between 1
+    if (userChoice < 1) {
+      throw new IllegalArgumentException("Player choice is out of range: " + userChoice);
+    }
+
+    return userChoice;
+  }
+
+  private static String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
-    value = (value == null) ? defaultValue : value;
+    value = (value == null) ? defaultValue : value; 
     return value;
   }
 
-  private String convertToJsonUsingGson(List<Comment> commentList) {
+  private static String convertToJsonUsingGson(List<Comment> commentList) {
     Gson gson = new Gson();
     String json = gson.toJson(commentList);
     return json;
   }
-
 }
