@@ -135,7 +135,7 @@ public final class TimeRange {
     return String.format("Range: [%d, %d)", start, start + duration);
   }
 
-  private static boolean contains(TimeRange range, int point) {
+  public static boolean contains(TimeRange range, int point) {
     // If a range has no duration, it cannot contain anything.
     if (range.duration <= 0) {
       return false;
@@ -148,7 +148,7 @@ public final class TimeRange {
 
     // If the point is on the end of the range. We don't count it as included in the range. For
     // example, if we have a range that starts at 8:00 and is 30 minutes long, it would end at 8:30.
-    // But that range should on contain 8:30 because it would end just before 8:30 began.
+    // But that range should not contain 8:30 because it would end just before 8:30 began.
     return point < range.start + range.duration;
   }
 
