@@ -39,7 +39,7 @@ public final class FindMeetingQuery {
         return Collections.emptyList();
     }
 
-    // Create a map to hold an ordered pair without duplicates of all events in the day. The Boolean is true if there are optional attendees attending this event, otherwise it's false
+    // Create a map to hold an ordered pair without duplicates of all events in the day. The set is ordered chronologically based on the starting times of each event. The Boolean is true if there are optional attendees attending this event, otherwise it's false.
     TreeMap<TimeRange, Boolean> busyTimes = new TreeMap<>(new Comparator<TimeRange>() {
          @Override
             public int compare(TimeRange s1, TimeRange s2) {
@@ -49,7 +49,7 @@ public final class FindMeetingQuery {
 
     // Add the beginning and end of the day as endpoints (the meeting can't be before the beginning of the day or after the end of the day)
     busyTimes.put(TimeRange.fromStartDuration(0, 0), new Boolean(false));
-    busyTimes.put(TimeRange.fromStartDuration(1440,0), new Boolean(false));
+    busyTimes.put(TimeRange.fromStartDuration(60*24,0), new Boolean(false));
 
     for (Event event : events){        
         // Create a timerange for the event that is currently being evaluated
@@ -58,10 +58,7 @@ public final class FindMeetingQuery {
         int newEventEnd = newEvent.end();
 
         // If none of the attendees in the request are attending this event, don't add it to BusyTimes because it's not relevant
-        Set<String> eventAttendees = event.getAttendees();
-        Collection<String> requestMandatoryAttendees = request.getAttendees();
-        Collection<String> requestOptionalAttendees = request.getOptionalAttendees();
-        if (Collections.disjoint(eventAttendees, requestMandatoryAttendees) && Collections.disjoint(eventAttendees, requestOptionalAttendees)){
+        if (Collections.disjoint(event.getAttendees(), request.getAttendees()) && Collections.disjoint(event.getAttendees(), request.getOptionalAttendees())){
             continue;
         }
 
@@ -80,35 +77,35 @@ public final class FindMeetingQuery {
             int adjustedNewEnd;
 
             // If the current busy time contains the new event, or they are equal, do not add the new event to the arraylist as it already exists
-            /*****/  //current busy block
-             /**/    //new event
+            // current busy block: #######
+            // new event:           ####
             if (busyTime.getKey().contains(newEvent) || busyTime.getKey().equals(newEvent)){
                 break; 
             }
             // If the new event starts during the current busy time and ends before the next busy time
-            /*******/        /**/       //busy blocks
-                 /******/               //new event
+            // busy blocks: #######     ####
+            // new event:        ####
             else if (TimeRange.contains(busyTime.getKey(), newEventStart) && newEventEnd <= nextBusyStart) {
                 adjustedNewStart = currentBusyEnd;
                 adjustedNewEnd = newEventEnd;
             }
             // If the new event's start is during the current busy time and it's end is in the next busy time, fill in the time between the busy times
-            /****/   /****/     //busy blocks
-              /********/        //new event
+            // busy blocks: #######     ######
+            // new event:        #########
             else if (TimeRange.contains(busyTime.getKey(), newEventStart) && TimeRange.contains(nextBusyTime.getKey(), newEventEnd)) {
                 adjustedNewStart = currentBusyEnd;
                 adjustedNewEnd = nextBusyStart;
             }
             // If the new event is strictly between the current and next busy times, add it as is
-            /***/        /***/      //busy blocks
-                   /**/             //new event
+            // busy blocks: #######         ######
+            // new event:             ###
             else if (newEventStart >= currentBusyEnd && newEventEnd <= nextBusyStart) {
                 adjustedNewStart = newEventStart;
                 adjustedNewEnd = newEventEnd;
             }
             // If it's start time is after the current busy block's end time and it's end time is during the next busy time
-            /***/        /***/      //busy blocks
-                    /*****/         //new event            
+            // busy blocks: #######      ######
+            // new event:             #####            
             else if (newEventStart >= currentBusyEnd && newEventStart < nextBusyStart && TimeRange.contains(nextBusyTime.getKey(), newEventEnd)) {
                 adjustedNewStart = newEventStart;
                 adjustedNewEnd = nextBusyStart;
@@ -119,7 +116,7 @@ public final class FindMeetingQuery {
             }
 
             // If the event doesn't have optional attendees from the request, add a busy time and indicate no optional attendees 
-            if (Collections.disjoint(eventAttendees, requestOptionalAttendees)){
+            if (Collections.disjoint(event.getAttendees(), request.getOptionalAttendees())){
                 busyTimes.put(TimeRange.fromStartEnd(adjustedNewStart, adjustedNewEnd, false), new Boolean (false));
 
             }
