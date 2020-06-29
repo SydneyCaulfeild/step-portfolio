@@ -68,8 +68,6 @@ public final class FindMeetingQuery {
                 break; 
             }
             //if the new event starts during the current busy time and ends before the next busy time
-            /*******/        /**/       //busy blocks
-                 /******/               //new event
             // busy blocks: #######     ####
             // new event:        ####
             else if (TimeRange.contains(busyTimes.get(i), newEventStart) && newEventEnd <= nextBusyStart) {
