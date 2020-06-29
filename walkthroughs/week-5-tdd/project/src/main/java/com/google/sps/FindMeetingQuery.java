@@ -35,12 +35,12 @@ public final class FindMeetingQuery {
         return Collections.emptyList();
     }
 
-    //an arraylist to hold an ordered list without duplicates of all busy times in a day
+    // A list without duplicates of all busy times in a day. The list is ordered chronologically based on the starting times of each event. 
     ArrayList<TimeRange> busyTimes = new ArrayList<TimeRange>();
 
     //adding the beginning and end of the day as endpoints (your meeting can't be before the beginning of the day or after the end of the day)
     busyTimes.add(TimeRange.fromStartDuration(0, 0));
-    busyTimes.add(TimeRange.fromStartDuration(1440,0));
+    busyTimes.add(TimeRange.fromStartDuration(60*24,0));
 
     for (Event event : events){
         //create a timerange for the event we're evaluating
@@ -49,9 +49,7 @@ public final class FindMeetingQuery {
         int newEventEnd = newEvent.end();
 
         //if none of the attendees in the request are attending this event, don't add it to BusyTimes because it's not relevant
-        Set<String> eventAttendees = event.getAttendees();
-        Collection<String> requestAttendees = request.getAttendees();
-        if (Collections.disjoint(eventAttendees, requestAttendees)){
+        if (Collections.disjoint(event.getAttendees(), request.getAttendees())){
             continue;
         }
 
@@ -64,35 +62,37 @@ public final class FindMeetingQuery {
             int adjustedNewEnd;
 
             //if the current busy time contains the new event, or they are equal, do not add the new event to the arraylist as it already exists
-            /*****/  //current busy block
-             /**/    //new event
+            // current busy block: #######
+            // new event:           ####
             if (busyTimes.get(i).contains(newEvent) || busyTimes.get(i).equals(newEvent)){
                 break; 
             }
             //if the new event starts during the current busy time and ends before the next busy time
             /*******/        /**/       //busy blocks
                  /******/               //new event
+            // busy blocks: #######     ####
+            // new event:        ####
             else if (TimeRange.contains(busyTimes.get(i), newEventStart) && newEventEnd <= nextBusyStart) {
                 adjustedNewStart = currentBusyEnd;
                 adjustedNewEnd = newEventEnd;
             }
             //if the new event's start is during the current busy time and it's end is in the next busy time, fill in the time between the busy times
-            /****/   /****/     //busy blocks
-              /********/        //new event
+            // busy blocks: #######     ######
+            // new event:        #########
             else if (TimeRange.contains(busyTimes.get(i), newEventStart) && TimeRange.contains(busyTimes.get(i+1), newEventEnd)) {
                 adjustedNewStart = currentBusyEnd;
                 adjustedNewEnd = nextBusyStart;
             }
             //if the new event is strictly between the current and next busy times, add it as is
-            /***/        /***/      //busy blocks
-                   /**/             //new event
+            // busy blocks: #######         ######
+            // new event:             ###
             else if (newEventStart >= currentBusyEnd && newEventEnd <= nextBusyStart) {
                 adjustedNewStart = newEventStart;
                 adjustedNewEnd = newEventEnd;
             }
             //if it's start time is after the current busy block's end time and it's end time is during the next busy time
-            /***/        /***/      //busy blocks
-                    /*****/         //new event            
+            // busy blocks: #######      ######
+            // new event:             #####            
             else if (newEventStart >= currentBusyEnd && newEventStart < nextBusyStart && TimeRange.contains(busyTimes.get(i+1), newEventEnd)) {
                 adjustedNewStart = newEventStart;
                 adjustedNewEnd = nextBusyStart;
