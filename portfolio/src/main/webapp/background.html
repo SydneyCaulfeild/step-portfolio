@@ -9,11 +9,11 @@
       <script src="script.js"></script>
     </head>
 
-    <body>
+    <body onload="fetchFavoriteCities()">
       
       <div class="header">
         <h1>My Background</h1>
-        <p>This page is all about my background.</p>
+        <p>My past and my passions.</p>
       </div>
       
       <!-- Element where the heading's navigation bar will be inserted. -->
@@ -43,11 +43,17 @@
       </div>
       
       <div id="intro">
-        <p>I was born in Toronto and moved to Ottawa when I was 7. Growing up I loved all sports; I did soccer, figure skating, tennis, swimming and gymnastics. My passion was strongest for soccer, and in high school I was captain of a provincial soccer team with the West Ottawa Soccer Club.</p>
-        <p>I also have a strong love for music. I began playing piano at the age of seven and during high school I founded and ran a private piano teaching company.</p>
+        <p>I am currently going into my third year of Computer Engineering at Queen's University in Kingston, Ontario. I was born in Toronto but grew up in Ottawa. Growing up I loved all sports; I did soccer, figure skating, tennis, swimming and gymnastics. My favourite has always been soccer, and in high school I was captain of a provincial soccer team with the West Ottawa Soccer Club.</p>
+        <p>I also have a deep love for music. I began playing piano at the age of seven and during high school I founded and ran a private piano teaching company.</p>
+        
         <p>Click here to get a random fact about me:</p>
         <button onclick="addRandomFact()">Learn About Me!</button>
         <div id="random-fact"></div>
+      </div>
+
+      <div id = "cities">
+          <p>Here is a list of my favourite cities that I have visited in Canada!</p>
+          <div id="cities-list-container"></div>
       </div>
 
       <!-- Element where the footer will be inserted. -->

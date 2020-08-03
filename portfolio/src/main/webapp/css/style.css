@@ -16,18 +16,6 @@ body {
   font-size: 40px;
 }
 
-#cities {
-  border: 2px solid #FF9F55;
-  border-radius:5px;
-  font-size:20px;
-  margin-left:auto;
-  margin-right:auto;
-  margin-bottom:40px;
-  padding:10px;
-  text-align:center;
-  width:30%;
-}
-
 #intro{
   padding-bottom:100px;
   padding-left:100px;
